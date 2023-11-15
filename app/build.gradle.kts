@@ -41,6 +41,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":color-picker"))
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
