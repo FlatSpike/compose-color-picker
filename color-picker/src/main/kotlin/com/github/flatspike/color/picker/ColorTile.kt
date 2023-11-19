@@ -18,10 +18,7 @@ fun ColorTile(
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.size(64.dp)) {
-        Canvas(modifier = Modifier
-            .padding(8.dp)
-            .fillMaxSize()
-        ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
             drawCheckerboard()
             drawRect(color)
         }
