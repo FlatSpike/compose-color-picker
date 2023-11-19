@@ -8,10 +8,10 @@ plugins {
 }
 
 android {
-    namespace = "com.flatspike.color.picker.example"
+    namespace = "com.github.flatspike.color.picker.example"
 
     defaultConfig {
-        applicationId = "com.flatspike.color.picker.example"
+        applicationId = "com.github.flatspike.color.picker.example"
 
         minSdk = 22
         targetSdk = 34
