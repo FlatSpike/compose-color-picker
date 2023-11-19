@@ -1,10 +1,12 @@
 package com.flatspike.color.picker.hsv
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.flatspike.color.picker.AlphaSlider
 
 @Composable
@@ -13,11 +15,18 @@ fun HsvColorPicker(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        HsvColorPalette(state = state)
+        HsvColorPalette(
+            modifier = Modifier.padding(16.dp),
+            state = state
+        )
 
-        HsvValueSlider(state = state)
+        HsvValueSlider(
+            modifier = Modifier.padding(8.dp),
+            state = state
+        )
 
         AlphaSlider(
+            modifier = Modifier.padding(8.dp),
             color = state.color,
             onColorChange = { state.color = it }
         )

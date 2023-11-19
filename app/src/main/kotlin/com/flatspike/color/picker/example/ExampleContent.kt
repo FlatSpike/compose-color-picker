@@ -43,6 +43,7 @@ fun ExampleContent() {
 
         HsvColorPalette(
             modifier = Modifier
+                .padding(16.dp)
                 .weight(1f)
                 .align(Alignment.CenterHorizontally),
             state = hsvColorState

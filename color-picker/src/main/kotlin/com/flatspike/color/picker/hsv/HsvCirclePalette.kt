@@ -59,7 +59,6 @@ fun HsvColorPalette(
 
         Canvas(
             modifier = Modifier
-                .padding(16.dp)
                 .aspectRatio(1f)
                 .pointerInput(Unit) {
                     detectTapGestures { offset ->
