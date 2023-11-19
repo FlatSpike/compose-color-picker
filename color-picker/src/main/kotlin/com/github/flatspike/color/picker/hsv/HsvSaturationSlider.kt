@@ -6,6 +6,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,7 +51,7 @@ fun HsvSaturationSlider(
     modifier: Modifier = Modifier,
     handle: DrawScope.(Offset, Color) -> Unit = defaultHandle
 ) {
-    Box(modifier = modifier.height(48.dp)) {
+    Box(modifier = modifier.heightIn(0.dp, 48.dp)) {
         val hsvState = rememberUpdatedState(hsv)
         val onHsvChangeState = rememberUpdatedState(onHsvChange)
         val handleState = rememberUpdatedState(handle)

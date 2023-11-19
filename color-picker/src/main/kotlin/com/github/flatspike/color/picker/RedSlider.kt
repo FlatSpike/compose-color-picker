@@ -6,6 +6,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,7 +39,7 @@ fun RedSlider(
         drawSliderHandle(offset, selectedColor)
     }
 ) {
-    Box(modifier = modifier.height(48.dp)) {
+    Box(modifier = modifier.heightIn(0.dp, 48.dp)) {
         val colorState = rememberUpdatedState(color)
         val onColorChangeState = rememberUpdatedState(onColorChange)
         val handleState = rememberUpdatedState(handle)

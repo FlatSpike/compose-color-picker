@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -17,7 +18,7 @@ fun ColorTile(
     color: Color,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier.size(64.dp)) {
+    Box(modifier = modifier.sizeIn(0.dp, 0.dp, 64.dp, 64.dp)) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             drawCheckerboard()
             drawRect(color)
