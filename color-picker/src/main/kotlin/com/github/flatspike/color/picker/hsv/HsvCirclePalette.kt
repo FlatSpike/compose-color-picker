@@ -1,11 +1,10 @@
-package com.flatspike.color.picker.hsv
+package com.github.flatspike.color.picker.hsv
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,9 +21,8 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
-import com.flatspike.color.picker.util.drawPalettePointer
+import com.github.flatspike.color.picker.util.drawPalettePointer
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.hypot

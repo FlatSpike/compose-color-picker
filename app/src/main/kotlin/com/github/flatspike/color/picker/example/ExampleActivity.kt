@@ -1,4 +1,4 @@
-package com.flatspike.color.picker.example
+package com.github.flatspike.color.picker.example
 
 import android.os.Bundle
 import androidx.activity.compose.setContent

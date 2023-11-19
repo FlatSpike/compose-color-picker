@@ -1,4 +1,4 @@
-package com.flatspike.color.picker.util
+package com.github.flatspike.color.picker.util
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size

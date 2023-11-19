@@ -1,4 +1,4 @@
-package com.flatspike.color.picker
+package com.github.flatspike.color.picker
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -6,7 +6,6 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,13 +24,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
-import com.flatspike.color.picker.util.clipRoundRect
-import com.flatspike.color.picker.util.drawSliderHandle
+import com.github.flatspike.color.picker.util.clipRoundRect
+import com.github.flatspike.color.picker.util.drawSliderHandle
 import kotlin.math.max
 import kotlin.math.min
 
 @Composable
-fun RedSlider(
+fun GreenSlider(
     color: Color,
     onColorChange: (Color) -> Unit,
     modifier: Modifier = Modifier,
@@ -68,8 +67,8 @@ fun RedSlider(
                 drawRect(
                     Brush.horizontalGradient(
                         listOf(
-                            maxAlphaColor.copy(red = 0f),
-                            maxAlphaColor.copy(red = 1f)
+                            maxAlphaColor.copy(green = 0f),
+                            maxAlphaColor.copy(green = 1f)
                         ),
                     )
                 )
@@ -87,15 +86,15 @@ fun RedSlider(
 private fun Offset.toColor(size: IntSize, origin: Color): Color = toColor(size.toSize(), origin)
 
 private fun Offset.toColor(size: Size, origin: Color): Color =
-    origin.copy(red = max(0f, min(x / size.width,1f)))
+    origin.copy(green = max(0f, min(x / size.width,1f)))
 
-private fun Color.toOffset(size: Size): Offset = Offset(size.width * red, size.height / 2)
+private fun Color.toOffset(size: Size): Offset = Offset(size.width * green, size.height / 2)
 
 @Preview(showBackground = true)
 @Composable
-private fun RedSliderPreview() {
+private fun RgbGreenSliderPreview() {
     var color by remember { mutableStateOf(Color.White) }
-    RedSlider(
+    GreenSlider(
         color = color,
         onColorChange = { color = it }
     )

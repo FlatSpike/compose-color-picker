@@ -1,4 +1,5 @@
-package com.flatspike.color.picker.example
+package com.github.flatspike.color.picker.example
+
 import androidx.compose.ui.graphics.Color
 
 val md_theme_light_primary = Color(0xFF6750A4)

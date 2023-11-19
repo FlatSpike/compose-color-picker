@@ -1,4 +1,4 @@
-package com.flatspike.color.picker
+package com.github.flatspike.color.picker
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.flatspike.color.picker.util.drawCheckerboard
+import com.github.flatspike.color.picker.util.drawCheckerboard
 
 @Composable
 fun ColorTile(

@@ -1,4 +1,4 @@
-package com.flatspike.color.picker.hsv
+package com.github.flatspike.color.picker.hsv
 
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.ui.graphics.Color

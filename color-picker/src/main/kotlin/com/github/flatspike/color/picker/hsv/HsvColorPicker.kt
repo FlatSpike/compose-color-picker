@@ -1,4 +1,4 @@
-package com.flatspike.color.picker.hsv
+package com.github.flatspike.color.picker.hsv
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.flatspike.color.picker.AlphaSlider
+import com.github.flatspike.color.picker.AlphaSlider
 
 @Composable
 fun HsvColorPicker(
