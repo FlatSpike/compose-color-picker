@@ -1,7 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import java.util.*
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -37,6 +35,15 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3"
+    }
+
+    buildTypes {
+        create("profile") {
+            initWith(getByName("debug"))
+            isDebuggable = false
+            isProfileable = true
+            matchingFallbacks += listOf("release", "debug")
+        }
     }
 }
 

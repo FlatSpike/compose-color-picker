@@ -1,7 +1,9 @@
-package com.github.flatspike.color.picker.hsv
+package com.github.flatspike.color.picker
 
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.colorspace.ColorSpace
+import androidx.compose.ui.graphics.colorspace.ColorSpaces
 import androidx.compose.ui.graphics.colorspace.Rgb
 
 
@@ -12,15 +14,9 @@ data class Hsv(
 ) {
 
     init {
-        require(hue in 0f..360f) {
-            "Hue $hue must be in range [0..360]"
-        }
-        require(saturation in 0f..1f) {
-            "Saturation $saturation must be in range [0..1]"
-        }
-        require(value in 0f..1f) {
-            "Value $value must be in range [0..1]"
-        }
+        require(hue in 0f..360f) { "Hue $hue must be in range [0..360]" }
+        require(saturation in 0f..1f) { "Saturation $saturation must be in range [0..1]" }
+        require(value in 0f..1f) { "Value $value must be in range [0..1]" }
     }
 
     companion object {
@@ -58,4 +54,7 @@ fun Hsv(color: Color): Hsv {
 
 val Color.hsv get() = Hsv(this)
 
-fun Hsv.toColor(alpha: Float = 1f): Color = Color.hsv(hue, saturation, value, alpha)
+fun Hsv.toColor(
+    alpha: Float = 1f,
+    colorSpace: Rgb = ColorSpaces.Srgb
+): Color = Color.hsv(hue, saturation, value, alpha, colorSpace)
