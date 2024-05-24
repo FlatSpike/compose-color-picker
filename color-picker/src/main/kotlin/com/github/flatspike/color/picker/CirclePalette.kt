@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -23,7 +22,7 @@ import kotlin.math.hypot
 import kotlin.math.sin
 
 private val DefaultThumb = @Composable { hsv: Hsv ->
-    ColorPickerDefaults.PaletteThumb(color = hsv.toColor())
+    ColorPickerDefaults.PaletteThumb(color = hsv.copy(value = 1f).toColor())
 }
 
 @Composable

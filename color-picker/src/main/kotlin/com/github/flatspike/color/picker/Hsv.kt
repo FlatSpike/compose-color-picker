@@ -2,7 +2,6 @@ package com.github.flatspike.color.picker
 
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.colorspace.ColorSpace
 import androidx.compose.ui.graphics.colorspace.ColorSpaces
 import androidx.compose.ui.graphics.colorspace.Rgb
 
@@ -21,10 +20,13 @@ data class Hsv(
 
     companion object {
 
+        @Suppress("unused")
         val White = Hsv(0f, 0f, 1f)
 
+        @Suppress("unused")
         val Black = Hsv(0f, 0f, 0f)
 
+        @Suppress("unused")
         val Saver = listSaver(
             save = { listOf(it.hue, it.saturation, it.value) },
             restore = { Hsv(it[0] as Float, it[1] as Float, it[2] as Float) }

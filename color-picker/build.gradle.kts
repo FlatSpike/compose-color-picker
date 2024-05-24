@@ -1,7 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import java.util.*
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
