@@ -1,4 +1,4 @@
-package com.github.flatspike.color.picker
+package com.github.flatspike.compose.color.picker
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider

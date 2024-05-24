@@ -1,4 +1,6 @@
-package com.github.flatspike.color.picker
+@file:Suppress("unused")
+
+package com.github.flatspike.compose.color.picker
 
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset

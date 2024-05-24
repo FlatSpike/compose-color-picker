@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.github.flatspike.color.picker"
+    namespace = "com.github.flatspike.compose.color.picker"
 
     defaultConfig {
         minSdk = 22

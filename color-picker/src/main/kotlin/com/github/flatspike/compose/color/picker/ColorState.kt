@@ -1,4 +1,4 @@
-package com.github.flatspike.color.picker
+package com.github.flatspike.compose.color.picker
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable

@@ -1,4 +1,6 @@
-package com.github.flatspike.color.picker.example
+@file:Suppress("unused")
+
+package com.github.flatspike.compose.color.picker.example
 
 import androidx.compose.ui.graphics.Color
 

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.github.flatspike.color.picker.example"
+    namespace = "com.github.flatspike.compose.color.picker.example"
 
     defaultConfig {
         applicationId = "com.github.flatspike.color.picker.example"

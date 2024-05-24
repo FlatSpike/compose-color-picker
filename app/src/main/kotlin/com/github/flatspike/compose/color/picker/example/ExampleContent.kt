@@ -1,4 +1,4 @@
-package com.github.flatspike.color.picker.example
+package com.github.flatspike.compose.color.picker.example
 
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
@@ -37,17 +37,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.github.flatspike.color.picker.AlphaSlider
-import com.github.flatspike.color.picker.BlueSlider
-import com.github.flatspike.color.picker.CirclePalette
-import com.github.flatspike.color.picker.ColorTile
-import com.github.flatspike.color.picker.GreenSlider
-import com.github.flatspike.color.picker.HueSlider
-import com.github.flatspike.color.picker.RedSlider
-import com.github.flatspike.color.picker.RingPalette
-import com.github.flatspike.color.picker.SaturationSlider
-import com.github.flatspike.color.picker.ValueSlider
-import com.github.flatspike.color.picker.rememberColorState
+import com.github.flatspike.compose.color.picker.AlphaSlider
+import com.github.flatspike.compose.color.picker.BlueSlider
+import com.github.flatspike.compose.color.picker.CirclePalette
+import com.github.flatspike.compose.color.picker.ColorTile
+import com.github.flatspike.compose.color.picker.GreenSlider
+import com.github.flatspike.compose.color.picker.HueSlider
+import com.github.flatspike.compose.color.picker.RedSlider
+import com.github.flatspike.compose.color.picker.RingPalette
+import com.github.flatspike.compose.color.picker.SaturationSlider
+import com.github.flatspike.compose.color.picker.ValueSlider
+import com.github.flatspike.compose.color.picker.rememberColorState
 
 enum class SelectedPalette {
     Circle,

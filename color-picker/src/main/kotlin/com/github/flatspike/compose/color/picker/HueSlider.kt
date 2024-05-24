@@ -1,27 +1,28 @@
-package com.github.flatspike.color.picker
+package com.github.flatspike.compose.color.picker
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 private val DefaultThumb = @Composable { hsv: Hsv ->
-    ColorPickerDefaults.SliderThumb(color = hsv.toColor())
+    ColorPickerDefaults.SliderThumb(color = hsv.copy(saturation = 1f, value = 1f).toColor())
 }
 
-private val DefaultTrack = @Composable { hsv: Hsv ->
-    ColorPickerDefaults.ValueTrack(hsv = hsv)
+private val DefaultTrack = @Composable { _: Hsv ->
+    ColorPickerDefaults.HueTrack()
 }
 
 @Composable
-fun ValueSlider(
+fun HueSlider(
     colorState: ColorState,
     modifier: Modifier = Modifier,
     thumb: @Composable (Hsv) -> Unit = DefaultThumb,
     track: @Composable (Hsv) -> Unit = DefaultTrack
 ) {
-    ValueSlider(
+    HueSlider(
         hsv = colorState.hsv,
         onHsvChange = { colorState.hsv = it },
         modifier = modifier,
@@ -32,7 +33,7 @@ fun ValueSlider(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ValueSlider(
+fun HueSlider(
     hsv: Hsv,
     onHsvChange: (Hsv) -> Unit,
     modifier: Modifier = Modifier,
@@ -40,10 +41,10 @@ fun ValueSlider(
     track: @Composable (Hsv) -> Unit = DefaultTrack
 ) {
     Slider(
-        value = hsv.value,
-        onValueChange = { onHsvChange(hsv.copy(value = it)) },
+        value = hsv.hue,
+        onValueChange = { onHsvChange(hsv.copy(hue = it)) },
         modifier = modifier,
-        valueRange = 0f .. 1f,
+        valueRange = 0f .. 360f,
         thumb = { thumb(hsv) },
         track = { track(hsv) }
     )
@@ -51,10 +52,8 @@ fun ValueSlider(
 
 @Preview(showBackground = true)
 @Composable
-private fun ValueSliderPreview() {
-    ValueSlider(
-        colorState = rememberColorState(
-            initialColor = Hsv(hue = 0f, saturation = 1f, value = 0.5f).toColor()
-        )
+private fun HueSliderPreview() {
+    HueSlider(
+        colorState = rememberColorState(initialColor = Color.Cyan)
     )
 }

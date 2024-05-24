@@ -1,4 +1,4 @@
-package com.github.flatspike.color.picker
+package com.github.flatspike.compose.color.picker
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 object ColorPickerDefaults {
 
     private val DefaultBorderWidth = 2.dp
-    private val DefaultBorderShape = CircleShape
     private val DefaultSliderThumbWidth = 16.dp
     private val DefaultSliderThumbHeight = 48.dp
     private val DefaultSliderTrackHeight = DefaultSliderThumbHeight
@@ -53,18 +52,6 @@ object ColorPickerDefaults {
             .clip(CircleShape)
             .background(maxAlphaColor)
             .border(BorderStroke(DefaultBorderWidth, borderColor), CircleShape)
-        )
-    }
-
-    @Composable
-    fun RingThumb(
-        color: Color,
-        modifier: Modifier = Modifier
-    ) {
-        Spacer(modifier = modifier
-            .size(DefaultPaletteThumbSize)
-            .background(color.copy(alpha = 1f), DefaultBorderShape)
-            .border(BorderStroke(DefaultBorderWidth, color.borderColor()), DefaultBorderShape)
         )
     }
 

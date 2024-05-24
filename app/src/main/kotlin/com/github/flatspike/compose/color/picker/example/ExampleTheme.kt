@@ -1,4 +1,4 @@
-package com.github.flatspike.color.picker.example
+package com.github.flatspike.compose.color.picker.example
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
