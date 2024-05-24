@@ -37,7 +37,7 @@ private val DefaultRingWidth = 42.dp
 private val DefaultMinSize = 64.dp
 
 private val DefaultRingThumb = @Composable { hsv: Hsv ->
-    ColorPickerDefaults.SliderThumb(color = hsv.toColor())
+    ColorPickerDefaults.SliderThumb(color = hsv.copy(saturation = 1f, value = 1f).toColor())
 }
 
 private val DefaultTriangleThumb = @Composable { hsv: Hsv ->

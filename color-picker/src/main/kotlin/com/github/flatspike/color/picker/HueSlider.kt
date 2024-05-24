@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 private val DefaultThumb = @Composable { hsv: Hsv ->
-    ColorPickerDefaults.SliderThumb(color = hsv.copy(value = 1f).toColor())
+    ColorPickerDefaults.SliderThumb(color = hsv.copy(saturation = 1f, value = 1f).toColor())
 }
 
 private val DefaultTrack = @Composable { _: Hsv ->
