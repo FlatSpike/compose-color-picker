@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":baselineprofile")
+
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -21,5 +24,6 @@ rootProject.name = "compose-color-picker"
 
 include(
     ":app",
-    ":color-picker"
+    ":color-picker",
+    ":baselineprofile"
 )

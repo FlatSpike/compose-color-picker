@@ -3,6 +3,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 android {
@@ -30,7 +31,17 @@ android {
     }
 }
 
+baselineProfile {
+    filter {
+        include("com.github.flatspike.compose.color.picker.**")
+    }
+}
+
 dependencies {
+    configurations["baselineProfile"].apply {
+        this(project(":baselineprofile"))
+    }
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)

@@ -3,6 +3,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 android {
@@ -15,7 +16,7 @@ android {
         targetSdk = 34
         compileSdk = 34
 
-        versionCode = 13
+        versionCode = 1
         versionName = "0.0.1"
 
         multiDexEnabled = true
@@ -38,17 +39,24 @@ android {
     }
 
     buildTypes {
-        create("profile") {
-            initWith(getByName("debug"))
-            isDebuggable = false
-            isProfileable = true
-            matchingFallbacks += listOf("release", "debug")
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("debug")
         }
+    }
+}
+
+baselineProfile {
+    filter {
+        include("com.github.flatspike.compose.color.picker.example.**")
     }
 }
 
 dependencies {
     implementation(project(":color-picker"))
+
+    configurations["baselineProfile"].apply {
+        this(project(":baselineprofile"))
+    }
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
@@ -57,6 +65,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.window)
     implementation(libs.google.android.material)
+    implementation(libs.androidx.profileinstaller)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
