@@ -38,9 +38,7 @@ baselineProfile {
 }
 
 dependencies {
-    configurations["baselineProfile"].apply {
-        this(project(":baselineprofile"))
-    }
+    "baselineProfile"(project(":baselineprofile"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
@@ -51,6 +49,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
+    testImplementation(libs.junit)
+    
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 
     coreLibraryDesugaring(libs.android.tools.desugar)

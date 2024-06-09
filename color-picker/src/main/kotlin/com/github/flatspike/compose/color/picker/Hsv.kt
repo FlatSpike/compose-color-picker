@@ -1,39 +1,76 @@
 package com.github.flatspike.compose.color.picker
 
-import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.colorspace.ColorSpaces
 import androidx.compose.ui.graphics.colorspace.Rgb
 
+@Immutable
+@JvmInline
+value class Hsv(val raw: UInt) {
 
-data class Hsv(
-    val hue: Float = 0f,
-    val saturation: Float = 0f,
-    val value: Float = 1f
-) {
+    @Stable
+    val hue get() = ((raw shr 16) and 0xffffu).toFloat() / 65535f * 360f
 
-    init {
-        require(hue in 0f..360f) { "Hue $hue must be in range [0..360]" }
-        require(saturation in 0f..1f) { "Saturation $saturation must be in range [0..1]" }
-        require(value in 0f..1f) { "Value $value must be in range [0..1]" }
-    }
+    @Stable
+    val saturation get() = ((raw shr 8) and 0xffu).toFloat() / 255f
+
+    @Stable
+    val value get() = (raw and 0xffu).toFloat() / 255f
+
+    @Stable
+    fun component1(): Float = hue
+
+    @Stable
+    fun component2(): Float = saturation
+
+    @Stable
+    fun component3(): Float = value
+
+    @Stable
+    fun copy(
+        hue: Float = this.hue,
+        saturation: Float = this.saturation,
+        value: Float = this.value
+    ) = Hsv(hue, saturation, value)
+
+    override fun toString(): String = "Hsv($hue, $saturation, $value)"
 
     companion object {
 
-        @Suppress("unused")
+        @Stable
         val White = Hsv(0f, 0f, 1f)
 
-        @Suppress("unused")
+        @Stable
         val Black = Hsv(0f, 0f, 0f)
-
-        @Suppress("unused")
-        val Saver = listSaver(
-            save = { listOf(it.hue, it.saturation, it.value) },
-            restore = { Hsv(it[0] as Float, it[1] as Float, it[2] as Float) }
-        )
     }
 }
 
+@Stable
+fun Hsv(raw: Int): Hsv = Hsv(raw.toUInt())
+
+fun Hsv.toInt() = raw.toInt()
+
+@Stable
+fun Hsv(
+    hue: Float = 0f,
+    saturation: Float = 0f,
+    value: Float = 1f
+): Hsv {
+    require(hue in 0f..360f) { "Hue $hue must be in range [0..360]" }
+    require(saturation in 0f..1f) { "Saturation $saturation must be in range [0..1]" }
+    require(value in 0f..1f) { "Value $value must be in range [0..1]" }
+    return Hsv(
+        (
+            ((hue / 360f * 65535f + 0.5f).toInt() shl 16) or
+            ((saturation * 255f + 0.5f).toInt() shl 8) or
+            (value * 255f + 0.5f).toInt()
+        ).toUInt()
+    )
+}
+
+@Stable
 fun Hsv(color: Color): Hsv {
     require(color.colorSpace is Rgb) {
         "Can`t create Hsv from color with non Rgb colorSpace ${color.colorSpace}"
@@ -54,8 +91,10 @@ fun Hsv(color: Color): Hsv {
     return Hsv(hue, saturation, value)
 }
 
+@Stable
 val Color.hsv get() = Hsv(this)
 
+@Stable
 fun Hsv.toColor(
     alpha: Float = 1f,
     colorSpace: Rgb = ColorSpaces.Srgb

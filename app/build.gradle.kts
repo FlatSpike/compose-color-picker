@@ -54,9 +54,7 @@ baselineProfile {
 dependencies {
     implementation(project(":color-picker"))
 
-    configurations["baselineProfile"].apply {
-        this(project(":baselineprofile"))
-    }
+    "baselineProfile"(project(":baselineprofile"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
