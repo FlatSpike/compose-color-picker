@@ -1,4 +1,4 @@
-package com.flatspike.compose.color.picker
+package com.github.flatspike.compose.color.picker
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.flatspike.compose.color.picker", appContext.packageName)
+        assertEquals("com.github.flatspike.compose.color.picker", appContext.packageName)
     }
 }

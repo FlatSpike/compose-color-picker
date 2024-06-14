@@ -28,6 +28,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
+import com.github.flatspike.compose.color.picker.util.TriangleConst
+import com.github.flatspike.compose.color.picker.util.addEquilateralTriangle
+import com.github.flatspike.compose.color.picker.util.addRing
+import com.github.flatspike.compose.color.picker.util.drawRing
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.hypot

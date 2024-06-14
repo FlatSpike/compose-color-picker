@@ -1,4 +1,4 @@
-package com.flatspike.compose.color.picker
+package com.github.flatspike.compose.color.picker
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

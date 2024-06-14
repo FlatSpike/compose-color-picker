@@ -50,7 +50,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     testImplementation(libs.junit)
-    
+    testImplementation(libs.mokito.core)
+    testImplementation(libs.mokito.kotlin)
+
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 
     coreLibraryDesugaring(libs.android.tools.desugar)

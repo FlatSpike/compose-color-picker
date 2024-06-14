@@ -29,10 +29,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,14 +40,18 @@ import androidx.compose.ui.unit.dp
 import com.github.flatspike.compose.color.picker.AlphaSlider
 import com.github.flatspike.compose.color.picker.BlueSlider
 import com.github.flatspike.compose.color.picker.CirclePalette
+import com.github.flatspike.compose.color.picker.ColorTextMappers
 import com.github.flatspike.compose.color.picker.ColorTile
 import com.github.flatspike.compose.color.picker.GreenSlider
+import com.github.flatspike.compose.color.picker.HsvTextMappers
 import com.github.flatspike.compose.color.picker.HueSlider
 import com.github.flatspike.compose.color.picker.RedSlider
 import com.github.flatspike.compose.color.picker.RingPalette
 import com.github.flatspike.compose.color.picker.SaturationSlider
 import com.github.flatspike.compose.color.picker.ValueSlider
 import com.github.flatspike.compose.color.picker.rememberColorState
+import com.github.flatspike.compose.color.picker.rememberColorTextState
+import com.github.flatspike.compose.color.picker.rememberHsvTextState
 
 enum class SelectedPalette {
     Circle,
@@ -57,7 +61,6 @@ enum class SelectedPalette {
 inline fun <T> T.applyIf(condition: Boolean, block: T.() -> T): T =
     if (condition) block() else this
 
-@OptIn(ExperimentalStdlibApi::class)
 @Composable
 fun ExampleContent(
     selectedPalette: SelectedPalette = SelectedPalette.Circle
@@ -126,31 +129,18 @@ fun ExampleContent(
             )
 
             val clipboardManager = LocalClipboardManager.current
-            var textArgb by remember {
-                val argb = colorState.color.toArgb()
-                mutableStateOf(argb.toHexString() to argb)
-            }
+            val colorTextState = rememberColorTextState(
+                colorState = colorState,
+                mapper = ColorTextMappers.Hex
+            )
             OutlinedTextField(
-                value = textArgb.let { (text, argb) ->
-                    val stateArgb = colorState.color.toArgb()
-                    if (argb == stateArgb) text else stateArgb.toHexString()
-                },
-                onValueChange = {
-                    if (it.isBlank()) {
-                        textArgb = "" to -1
-                        colorState.color = Color(-1)
-                    } else {
-                        val argb = it.toIntOrNull(16)
-                        if (argb != null) {
-                            textArgb = it to argb
-                            colorState.color = Color(argb)
-                        }
-                    }
-                },
+                value = colorTextState.text,
+                onValueChange = { colorTextState.text = it },
                 modifier = Modifier.weight(1f),
                 maxLines = 1,
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Ascii
+                    keyboardType = KeyboardType.Ascii,
+                    imeAction = ImeAction.Done
                 ),
                 label = { Text(text = "Color") },
                 trailingIcon = {
@@ -158,7 +148,7 @@ fun ExampleContent(
                         painter = painterResource(R.drawable.ic_content_copy),
                         contentDescription = "Copy",
                         modifier = Modifier.clickable {
-                            clipboardManager.setText(AnnotatedString(textArgb.first))
+                            clipboardManager.setText(AnnotatedString(colorTextState.text))
                         }
                     )
                 }
@@ -168,14 +158,13 @@ fun ExampleContent(
         SliderRow(
             slider = { HueSlider(colorState = colorState) },
             textField = {
+                val hsvTextState = rememberHsvTextState(
+                    colorState = colorState,
+                    mapper = HsvTextMappers.Hue
+                )
                 OutlinedTextField(
-                    value = colorState.hsv.hue.toString(),
-                    onValueChange = { string ->
-                        string
-                            .toFloatOrNull()
-                            ?.let { if (it in 0f..360f) it else null }
-                            ?.also { colorState.hsv = colorState.hsv.copy(hue = it) }
-                    },
+                    value = hsvTextState.text,
+                    onValueChange = { hsvTextState.text = it },
                     label = { Text(text = "Hue") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -186,14 +175,13 @@ fun ExampleContent(
         SliderRow(
             slider = { SaturationSlider(colorState = colorState) },
             textField = {
+                val hsvTextState = rememberHsvTextState(
+                    colorState = colorState,
+                    mapper = HsvTextMappers.Saturation
+                )
                 OutlinedTextField(
-                    value = colorState.hsv.saturation.toString(),
-                    onValueChange = { string ->
-                        string
-                            .toFloatOrNull()
-                            ?.let { if (it in 0f..1f) it else null }
-                            ?.also { colorState.hsv = colorState.hsv.copy(saturation = it) }
-                    },
+                    value = hsvTextState.text,
+                    onValueChange = { hsvTextState.text = it },
                     label = {
                         Text(
                             text = "Saturation",
@@ -212,14 +200,13 @@ fun ExampleContent(
                 ValueSlider(colorState = colorState)
             },
             textField = {
+                val hsvTextState = rememberHsvTextState(
+                    colorState = colorState,
+                    mapper = HsvTextMappers.Value
+                )
                 OutlinedTextField(
-                    value = colorState.hsv.value.toString(),
-                    onValueChange = { string ->
-                        string
-                            .toFloatOrNull()
-                            ?.let { if (it in 0f..1f) it else null }
-                            ?.also { colorState.hsv = colorState.hsv.copy(value = it) }
-                    },
+                    value = hsvTextState.text,
+                    onValueChange = { hsvTextState.text = it },
                     label = { Text(text = "Value") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -232,14 +219,13 @@ fun ExampleContent(
                 AlphaSlider(colorState = colorState)
             },
             textField = {
+                val colorTextState = rememberColorTextState(
+                    colorState = colorState,
+                    mapper = ColorTextMappers.Alpha
+                )
                 OutlinedTextField(
-                    value = colorState.color.alpha.toString(),
-                    onValueChange = { string ->
-                        string
-                            .toFloatOrNull()
-                            ?.let { if (it in 0f..1f) it else null }
-                            ?.also { colorState.color = colorState.color.copy(alpha = it) }
-                    },
+                    value = colorTextState.text,
+                    onValueChange = { colorTextState.text = it },
                     label = { Text(text = "Alpha") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -252,14 +238,13 @@ fun ExampleContent(
                 RedSlider(colorState = colorState)
             },
             textField = {
+                val colorTextState = rememberColorTextState(
+                    colorState = colorState,
+                    mapper = ColorTextMappers.Red
+                )
                 OutlinedTextField(
-                    value = colorState.color.red.toString(),
-                    onValueChange = { string ->
-                        string
-                            .toFloatOrNull()
-                            ?.let { if (it in 0f..1f) it else null }
-                            ?.also { colorState.color = colorState.color.copy(red = it) }
-                    },
+                    value = colorTextState.text,
+                    onValueChange = { colorTextState.text = it },
                     label = { Text(text = "Red") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -272,15 +257,14 @@ fun ExampleContent(
                 GreenSlider(colorState = colorState)
             },
             textField = {
+                val colorTextState = rememberColorTextState(
+                    colorState = colorState,
+                    mapper = ColorTextMappers.Green
+                )
                 OutlinedTextField(
                     modifier = Modifier.width(76.dp),
-                    value = colorState.color.green.toString(),
-                    onValueChange = { string ->
-                        string
-                            .toFloatOrNull()
-                            ?.let { if (it in 0f..1f) it else null }
-                            ?.also { colorState.color = colorState.color.copy(green = it) }
-                    },
+                    value = colorTextState.text,
+                    onValueChange = { colorTextState.text = it },
                     label = { Text(text = "Green") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -293,15 +277,14 @@ fun ExampleContent(
                 BlueSlider(colorState = colorState)
             },
             textField = {
+                val colorTextState = rememberColorTextState(
+                    colorState = colorState,
+                    mapper = ColorTextMappers.Blue
+                )
                 OutlinedTextField(
-                    value = colorState.color.blue.toString(),
-                    onValueChange = { string ->
-                        string
-                            .toFloatOrNull()
-                            ?.let { if (it in 0f..1f) it else null }
-                            ?.also { colorState.color = colorState.color.copy(blue = it) }
-                    },
-                    label = { Text(text = "Green") },
+                    value = colorTextState.text,
+                    onValueChange = { colorTextState.text = it },
+                    label = { Text(text = "Blue") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )

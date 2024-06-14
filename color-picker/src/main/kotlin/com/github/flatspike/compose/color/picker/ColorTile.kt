@@ -10,6 +10,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.github.flatspike.compose.color.picker.util.drawCheckerboard
 
 private val DefaultSize = 64.dp
 private val DefaultCornerShape = RoundedCornerShape(8.dp)
